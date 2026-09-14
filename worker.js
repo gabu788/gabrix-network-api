@@ -5,7 +5,13 @@
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders() });
     }
-
+if (url.pathname === "/api/admin-config-check" && request.method === "GET") {
+  return json({
+    ok: true,
+    adminConfigured: Boolean(env.ADMIN_CODE),
+    secretName: "ADMIN_CODE"
+  });
+}
     try {
       await initDatabase(env.DB);
 
