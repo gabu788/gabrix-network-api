@@ -12,3 +12,7 @@
     }
   ]
 }
+"secrets": {
+  "required": ["ADMIN_CODE"]
+}
+}
