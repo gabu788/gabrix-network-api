@@ -1,3 +1,4 @@
+
 {
   "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
   "name": "gabrix-network-api",
