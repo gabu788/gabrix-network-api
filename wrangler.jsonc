@@ -3,10 +3,5 @@
   "name": "gabrix-network-api",
   "main": "worker.js",
   "compatibility_date": "2026-09-14",
-  "workers_dev": true,
-  "secrets": {
-    "required": [
-      "ADMIN_CODE"
-    ]
-  }
+  "workers_dev": true
 }
