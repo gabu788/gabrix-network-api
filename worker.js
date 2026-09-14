@@ -190,7 +190,43 @@ if (url.pathname === "/api/admin-config-check" && request.method === "GET") {
           clients: (result.results || []).map(formatClient)
         });
       }
+if (
+  url.pathname === "/api/admin-delete-client" &&
+  request.method === "POST"
+) {
+  await requireAdmin(request, env);
 
+  const body = await request.json();
+  const clientId = clean(body.clientId);
+
+  if (!clientId) {
+    return json({ error: "Client ID is required." }, 400);
+  }
+
+  const client = await env.DB
+    .prepare(`SELECT * FROM clients WHERE id=? LIMIT 1`)
+    .bind(clientId)
+    .first();
+
+  if (!client) {
+    return json({ error: "Client not found." }, 404);
+  }
+
+  await env.DB
+    .prepare(`DELETE FROM work_updates WHERE client_id=?`)
+    .bind(clientId)
+    .run();
+
+  await env.DB
+    .prepare(`DELETE FROM clients WHERE id=?`)
+    .bind(clientId)
+    .run();
+
+  return json({
+    ok: true,
+    message: "Client and client code deleted successfully."
+  });
+}
       if (
         url.pathname === "/api/admin-work-update" &&
         request.method === "POST"
