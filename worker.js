@@ -68,7 +68,16 @@ if (url.pathname === "/api/admin-config-check" && request.method === "GET") {
         if (!client) {
           return json({ error: "Invalid client code." }, 401);
         }
-
+const latestUpdate = await env.DB
+  .prepare(`
+    SELECT *
+    FROM work_updates
+    WHERE client_id=?
+    ORDER BY created_at DESC
+    LIMIT 1
+  `)
+  .bind(client.id)
+  .first();
         return json({
           ok: true,
           client: formatClient(client)
