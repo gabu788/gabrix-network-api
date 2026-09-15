@@ -79,11 +79,10 @@ const latestUpdate = await env.DB
   .bind(client.id)
   .first();
         return json({
-          ok: true,
-          client: formatClient(client)
-        });
-      }
-
+          ok: true,client: {
+  ...formatClient(client),
+  latestUpdate: latestUpdate || null
+          }
       if (
         url.pathname === "/api/admin-create-client" &&
         request.method === "POST"
