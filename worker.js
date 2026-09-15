@@ -83,6 +83,9 @@ const latestUpdate = await env.DB
   ...formatClient(client),
   latestUpdate: latestUpdate || null
           }
+        });
+      }
+
       if (
         url.pathname === "/api/admin-create-client" &&
         request.method === "POST"
