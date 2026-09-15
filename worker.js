@@ -82,8 +82,7 @@ const latestUpdate = await env.DB
   ok: true,
   client: {
     ...formatClient(client),
-    latestUpdate: latestUpdate || null
-  }
+    latestUpdate: latestUpdate || null }
 });
 }
 
