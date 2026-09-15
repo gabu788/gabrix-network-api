@@ -79,12 +79,15 @@ const latestUpdate = await env.DB
   .bind(client.id)
   .first();
         return json({
-          ok: true,client: {
-  ...formatClient(client),
-  latestUpdate: latestUpdate || null
-          }
-        });
-      }
+  ok: true,
+  client: {
+    ...formatClient(client),
+    latestUpdate: latestUpdate || null
+  }
+});
+}
+
+if (
 
       if (
         url.pathname === "/api/admin-create-client" &&
